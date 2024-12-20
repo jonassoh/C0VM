@@ -1,0 +1,21 @@
+/**************************************************************************/
+/*              COPYRIGHT Carnegie Mellon University 2024                 */
+/* Do not post this file or any derivative on a public site or repository */
+/**************************************************************************/
+#use <conio>
+
+int main() {
+    string[] A = alloc_array(string, 9);
+    int sum = 0;
+    // for (int i = 0; i < 3; i++) {
+    //     A[i] = alloc(char);
+    //     *A[i] = 'h';
+    //     sum++;
+    // }
+    // A[0] = alloc(char);
+    // *A[0] = 'h';
+    // A[1] = alloc(char);
+    // *A[1] = 'h';
+    A[8] = "hello";
+    return sum;
+}

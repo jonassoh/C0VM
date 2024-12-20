@@ -1,0 +1,117 @@
+C0 C0 FF EE       # magic number
+00 17             # version 11, arch = 1 (64 bits)
+
+00 04             # int pool count
+# int pool
+7F FF FF FF
+07 5B CD 15
+00 00 03 E8
+00 00 00 FF
+
+00 2E             # string pool total size
+# string pool
+74 65 73 74 73 2F 63 75 73 74 5F 74 65 73 74 2E 63 30 3A 20 31 37 2E 39 2D 31 37 2E 32 34 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/cust_test.c0: 17.9-17.24: assert failed"
+
+00 01             # function count
+# function_pool
+
+#<main>
+00                # number of arguments = 0
+04                # number of local variables = 4
+00 A4             # code length = 164 bytes
+13 00 00 # ildc 0             # c[0] = 2147483647
+36 00    # vstore 0           # a = 2147483647;
+13 00 01 # ildc 1             # c[1] = 123456789
+36 01    # vstore 1           # b = 123456789;
+10 00    # bipush 0           # 0
+36 02    # vstore 2           # c = 0;
+10 00    # bipush 0           # 0
+36 03    # vstore 3           # i = 0;
+10 00    # bipush 0           # 0
+36 03    # vstore 3           # i = 0;
+# <00:loop>
+15 03    # vload 3            # i
+10 0A    # bipush 10          # 10
+A1 00 06 # if_icmplt +6       # if (i < 10) goto <01:body>
+A7 00 7D # goto +125          # goto <02:exit>
+# <01:body>
+15 00    # vload 0            # a
+15 01    # vload 1            # b
+A3 00 06 # if_icmpgt +6       # if (a > b) goto <06:and>
+A7 00 1A # goto +26           # goto <04:else>
+# <06:and>
+15 00    # vload 0            # a
+15 01    # vload 1            # b
+A0 00 06 # if_cmpne +6        # if (a != b) goto <03:then>
+A7 00 10 # goto +16           # goto <04:else>
+# <03:then>
+15 00    # vload 0            # a
+15 01    # vload 1            # b
+60       # iadd               # (a + b)
+10 02    # bipush 2           # 2
+7A       # ishr               # ((a + b) >> 2)
+36 02    # vstore 2           # c = ((a + b) >> 2);
+A7 00 24 # goto +36           # goto <05:endif>
+# <04:else>
+15 00    # vload 0            # a
+15 01    # vload 1            # b
+A4 00 10 # if_icmple +16      # if (a <= b) goto <07:then>
+A7 00 03 # goto +3            # goto <10:or>
+# <10:or>
+15 00    # vload 0            # a
+15 01    # vload 1            # b
+9F 00 06 # if_cmpeq +6        # if (a == b) goto <07:then>
+A7 00 10 # goto +16           # goto <08:else>
+# <07:then>
+15 00    # vload 0            # a
+15 01    # vload 1            # b
+82       # ixor               # (a ^ b)
+10 02    # bipush 2           # 2
+68       # imul               # ((a ^ b) * 2)
+36 02    # vstore 2           # c = ((a ^ b) * 2);
+A7 00 03 # goto +3            # goto <09:endif>
+# <08:else>
+# <09:endif>
+# <05:endif>
+15 02    # vload 2            # c
+13 00 02 # ildc 2             # c[2] = 1000
+70       # irem               # (c % 1000)
+15 03    # vload 3            # i
+64       # isub               # ((c % 1000) - i)
+36 02    # vstore 2           # c = ((c % 1000) - i);
+15 02    # vload 2            # c
+13 00 03 # ildc 3             # c[3] = 255
+7E       # iand               # (c & 255)
+15 03    # vload 3            # i
+10 03    # bipush 3           # 3
+78       # ishl               # (i << 3)
+80       # ior                # ((c & 255) | (i << 3))
+36 02    # vstore 2           # c = ((c & 255) | (i << 3));
+15 02    # vload 2            # c
+10 00    # bipush 0           # 0
+A2 00 06 # if_icmpge +6       # if (c >= 0) goto <11:cond_true>
+A7 00 08 # goto +8            # goto <12:cond_false>
+# <11:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <13:cond_end>
+# <12:cond_false>
+10 00    # bipush 0           # false
+# <13:cond_end>
+14 00 00 # aldc 0             # s[0] = "tests/cust_test.c0: 17.9-17.24: assert failed"
+CF       # assert             # assert (c >= 0) [failure message on stack]
+15 03    # vload 3            # i
+10 01    # bipush 1           # 1
+60       # iadd               # 
+36 03    # vstore 3           # i += 1;
+A7 FF 7F # goto -129          # goto <00:loop>
+# <02:exit>
+15 02    # vload 2            # c
+10 03    # bipush 3           # 3
+6C       # idiv               # (c / 3)
+36 02    # vstore 2           # c = (c / 3);
+15 02    # vload 2            # c
+B0       # return             # 
+
+00 00             # native count
+# native pool
+
